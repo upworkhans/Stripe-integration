@@ -1,0 +1,49 @@
+{
+  "name": "stripe-playground-demo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A comprehensive Next.js + TypeScript demo app showcasing all Stripe payment flows.",
+  "scripts": {
+    "dev": "next dev -p ${PORT:-3000}",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3000}",
+    "lint": "eslint . --ext .ts,.tsx,.js,.cjs,.mjs",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "seed": "ts-node --transpile-only prisma/seed.ts",
+    "test": "playwright test",
+    "postinstall": "prisma generate || echo 'Skipping prisma generate'"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "@stripe/react-stripe-js": "^2.5.0",
+    "@stripe/stripe-js": "^3.4.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "next": "14.2.5",
+    "next-safe-action": "^7.7.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "stripe": "15.9.0",
+    "tailwind-merge": "^2.5.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "@types/node": "^20.11.30",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.5",
+    "postcss": "^8.4.38",
+    "prettier": "^3.3.2",
+    "prisma": "^5.19.1",
+    "tailwindcss": "^3.4.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
