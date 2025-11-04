@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import type { Route } from 'next';
 
 type NavGroup = {
   label: string;
-  items: { href: string; label: string }[];
+  items: { href: Route; label: string }[];
 };
 
 const groups: NavGroup[] = [
@@ -22,8 +23,7 @@ const groups: NavGroup[] = [
     items: [
       { href: '/subscriptions', label: 'Subscriptions' },
       { href: '/billing', label: 'Invoices & Portal' },
-      { href: '/prices', label: 'Prices' },
-    ].filter(Boolean as unknown as (v: any) => v),
+    ],
   },
   {
     label: 'Customers',

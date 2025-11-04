@@ -1,9 +1,10 @@
 'use client';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+export const dynamic = 'force-dynamic';
 
-export default function SuccessPage() {
+function SuccessContent() {
   const params = useSearchParams();
   const sessionId = params.get('session_id');
   const paymentIntentId = params.get('payment_intent');
@@ -48,6 +49,14 @@ export default function SuccessPage() {
         <Link href="/" className="inline-block bg-brand text-white px-4 py-2 rounded hover:bg-brand-dark">Return Home</Link>
       </div>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={<div className="bg-white rounded-xl p-6 border border-gray-200 max-w-2xl mx-auto text-center">Loading…</div>}>
+      <SuccessContent />
+    </Suspense>
   );
 }
 

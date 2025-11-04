@@ -33,7 +33,6 @@ export function LogPanel() {
       </div>
       {/* Expose control to parents via custom event */}
       <div className="hidden" data-log-api>
-        {/* @ts-expect-error custom property */}
         {((window as any).addDemoLog = addLog) && null}
       </div>
     </div>
