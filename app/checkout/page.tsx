@@ -46,6 +46,10 @@ export default function CheckoutPage() {
       <div className="bg-white rounded-xl p-6 border border-gray-200">
         <h1 className="text-xl font-semibold mb-2">Off-site Checkout</h1>
         <p className="text-gray-600 mb-4">Create a Checkout Session for one-time or subscription.</p>
+        <div className="mb-4 rounded-lg border border-blue-100 bg-blue-50 p-3 text-sm text-blue-900">
+          Use test card 4242 4242 4242 4242 with any future date, any CVC, any ZIP. For more options (3DS, declines, wallets), see
+          <a href="https://stripe.com/docs/testing" target="_blank" rel="noreferrer" className="ml-1 underline text-brand">Stripe test docs</a>.
+        </div>
         <div className="grid sm:grid-cols-2 gap-4">
           <label className="block">
             <span className="text-sm text-gray-600">Price (optional)</span>

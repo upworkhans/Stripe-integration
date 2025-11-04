@@ -64,6 +64,18 @@ export default function PaymentElementPage() {
       ) : (
         <div>Creating PaymentIntent…</div>
       )}
+      <div className="mt-6 rounded-lg border border-blue-100 bg-blue-50 p-4 text-sm text-blue-900">
+        <div className="font-medium">Test cards</div>
+        <div className="mt-1">Use 4242 4242 4242 4242, any future date, any CVC, any ZIP.</div>
+        <a
+          href="https://stripe.com/docs/testing#payment-methods"
+          target="_blank"
+          rel="noreferrer"
+          className="mt-2 inline-block text-brand hover:underline"
+        >
+          More payment method test details
+        </a>
+      </div>
     </div>
   );
 }
