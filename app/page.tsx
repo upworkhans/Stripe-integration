@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { Route } from 'next';
 
 const pages = [
   { href: '/checkout', label: 'Off-site Checkout' },
@@ -16,7 +17,7 @@ const pages = [
   { href: '/customers', label: 'Portal & Customer Management' },
   { href: '/advanced', label: 'Advanced (SCA/3DS, Tax, Multi-currency)' },
   { href: '/dev-tools', label: 'Dev Tools' }
-];
+] as const satisfies ReadonlyArray<{ href: Route; label: string }>;
 
 export default function HomePage() {
   return (
