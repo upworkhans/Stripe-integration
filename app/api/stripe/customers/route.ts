@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
+import { rateLimitKeyFromRequestHeaders, rateLimitPaymentAttempts } from '@/lib/rateLimit';
 
 export async function POST(req: NextRequest) {
   try {
+    const key = rateLimitKeyFromRequestHeaders(req.headers as any);
+    const rl = rateLimitPaymentAttempts(key);
+    if (!rl.allowed) {
+      return NextResponse.json({ error: rl.reason }, { status: 429 });
+    }
     const body = await req.json();
     const stripe = getStripe();
     const customer = await stripe.customers.create({ email: body.email, name: body.name });
