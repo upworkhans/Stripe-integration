@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { redactSecrets } from '@/lib/redact';
 
 type PriceItem = { id: string; productName: string | null; nickname: string | null; unit_amount: number; currency: string; recurring: { interval: string } | null };
 
@@ -82,7 +83,7 @@ export default function CheckoutPage() {
       </div>
       <div className="bg-white rounded-xl p-6 border border-gray-200">
         <div className="font-medium mb-2">Response</div>
-        <pre className="text-sm bg-gray-100 p-3 rounded max-h-80 overflow-auto">{JSON.stringify(log, null, 2)}</pre>
+        <pre className="text-sm bg-gray-100 p-3 rounded max-h-80 overflow-auto">{JSON.stringify(redactSecrets(log), null, 2)}</pre>
       </div>
     </div>
   );

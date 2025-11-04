@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getStripe } from '@/lib/stripe';
 import { env } from '@/lib/env';
+import { rateLimitKeyFromRequestHeaders, rateLimitPaymentAttempts } from '@/lib/rateLimit';
 
 const createSchema = z.object({
   amount: z.number().int().positive(),
@@ -13,6 +14,11 @@ const createSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    const key = rateLimitKeyFromRequestHeaders(req.headers as any);
+    const rl = rateLimitPaymentAttempts(key);
+    if (!rl.allowed) {
+      return NextResponse.json({ error: rl.reason }, { status: 429 });
+    }
     const body = await req.json();
     const parsed = createSchema.safeParse(body);
     if (!parsed.success) {
@@ -29,7 +35,10 @@ export async function POST(req: NextRequest) {
       payment_method_types: parsed.data.payment_method_types,
     });
 
-    return NextResponse.json({ id: intent.id, client_secret: (intent as any).client_secret, intent });
+    // Do not return nested client_secret inside intent
+    const { client_secret } = (intent as any);
+    const sanitized = { ...intent, client_secret: undefined };
+    return NextResponse.json({ id: intent.id, client_secret, intent: sanitized });
   } catch (err: any) {
     return NextResponse.json({ error: err?.message || 'Unknown error' }, { status: 500 });
   }

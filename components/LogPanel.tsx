@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { redactSecrets } from '@/lib/redact';
 
 export function LogPanel() {
   const [logs, setLogs] = useState<string[]>([]);
 
   function addLog(entry: unknown) {
-    const text = typeof entry === 'string' ? entry : JSON.stringify(entry, null, 2);
-    setLogs((prev) => [text, ...prev]);
+    const safe = typeof entry === 'string' ? entry : JSON.stringify(redactSecrets(entry), null, 2);
+    setLogs((prev) => [safe, ...prev]);
   }
 
   return (
