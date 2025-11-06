@@ -8,6 +8,7 @@ const pages = [
   { href: '/payment-request', label: 'Payment Request Button' },
   { href: '/rest-api', label: 'Direct REST API' },
   { href: '/iframe', label: 'Iframe Integration' },
+  { href: '/partial-payments', label: 'Partial Payments (10/90)' },
   { href: '/subscriptions', label: 'Subscriptions & Plans' },
   { href: '/one-time', label: 'One-time Direct Payment' },
   { href: '/saved-methods', label: 'Saved Payment Methods' },
